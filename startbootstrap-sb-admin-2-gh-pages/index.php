@@ -42,13 +42,13 @@
             echo "Connection failed: " . $e->getMessage();
             exit(); // หยุดการทำงานของโปรแกรม
         }
-        include 'table.php';
     ?>
 
 </head>
 
 <body id="page-top">
 
+<?php include 'table.php'; ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
