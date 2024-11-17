@@ -23,6 +23,25 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <?php
+    // กำหนดค่าตัวแปรสำหรับการเชื่อมต่อฐานข้อมูล
+    $servername = "m7nj9dclezfq7ax1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"; // ชื่อเซิร์ฟเวอร์ฐานข้อมูล
+    $username = "p1jryqynwuzez4tj"; // ชื่อผู้ใช้ฐานข้อมูล
+    $password = "hbjnf2ffhkcvcnak"; // รหัสผ่านฐานข้อมูล
+    $dbname = "ickshh2zl54q79ab"; // ชื่อฐานข้อมูลของเรา
+
+    try {
+        // สร้างการเชื่อมต่อฐานข้อมูลโดยใช้ PDO
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+        // ตั้งค่าให้ PDO แสดงข้อผิดพลาดเป็นข้อยกเว้น (Exception)
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        // แสดงข้อความเมื่อการเชื่อมต่อล้มเหลว และแสดงข้อผิดพลาด
+        echo "Connection failed: " . $e->getMessage();
+        exit(); // หยุดการทำงานของโปรแกรม
+    }
+?>
+
 </head>
 
 <body id="page-top">

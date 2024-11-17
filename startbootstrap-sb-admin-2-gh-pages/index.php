@@ -47,8 +47,12 @@
 </head>
 
 <body id="page-top">
+    <p>กดปุ่มเพื่อดูตารางข้อมูล:</p>
 
-<?php include 'table.php'; ?>
+    <!-- ปุ่มที่ลิงก์ไปยัง table.php -->
+    <a href="teble_data.php">
+        <button style="padding: 10px 20px; font-size: 16px;">เปิดตารางข้อมูล</button>
+    </a>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
