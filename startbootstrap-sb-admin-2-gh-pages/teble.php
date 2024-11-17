@@ -42,7 +42,6 @@
             echo "Connection failed: " . $e->getMessage();
             exit(); // หยุดการทำงานของโปรแกรม
         }
-        include 'table.php';
     ?>
 
 </head>
@@ -62,7 +61,50 @@
             
 
                 <!-- Begin Page Content -->
-               
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">user_name</h1>
+                    <p class="mb-4"> Clinic_name.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">ประวัติผลการตรวจผล</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>ผลการตรวย</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            try {
+                                                $stmt = $conn->prepare("SELECT User_Name, Meet_Result FROM Oral_C_data");
+                                                $stmt->execute();
+                                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . htmlspecialchars($row['User_Name']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($row['Meet_Result']) . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } catch (PDOException $e) {
+                                                echo "Error: " . $e->getMessage();
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
