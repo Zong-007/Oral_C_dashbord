@@ -44,73 +44,93 @@
         }
     ?>
 
+    <style>
+        /* จัดฟอร์มให้อยู่ตรงกลางหน้าจอ */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fc;
+        }
+
+        /* สไตล์กล่องฟอร์ม */
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2e59d9;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
-    <p>กดปุ่มเพื่อดูตารางข้อมูล:</p>
 
-    <!-- ปุ่มที่ลิงก์ไปยัง table.php -->
-    <a href="teble_data.php">
-        <button style="padding: 10px 20px; font-size: 16px;">เปิดตารางข้อมูล</button>
-    </a>
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<form id="mobileForm" action="teble_data.php" method="GET" onsubmit="return validateForm()">
+        <h1>Mobile Number</h1>
+        <!-- ช่องสำหรับใส่เบอร์มือถือ -->
+        <input 
+            type="tel" 
+            id="mobileNumber" 
+            name="mobileNumber" 
+            placeholder="กรอกหมายเลขโทรศัพท์" 
+            required 
+            pattern="[0-9]{10}" 
+            style="padding: 10px; font-size: 16px;">
+        <br><br>
 
+        <!-- ปุ่ม Submit -->
+        <button type="submit" style="padding: 10px 20px; font-size: 16px;">Submit</button>
+    </form>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <script>
+        function validateForm() {
+            // ดึงค่า input ของหมายเลขโทรศัพท์
+            const mobileNumber = document.getElementById('mobileNumber').value;
 
-            <!-- Main Content -->
-            <div id="content">
+            // ตรวจสอบว่ามีการกรอกข้อมูลหรือไม่
+            if (mobileNumber.trim() === "") {
+                alert("กรุณากรอกหมายเลขโทรศัพท์มือถือ!");
+                return false; // ป้องกันการส่งฟอร์ม
+            }
 
-            
+            // ตรวจสอบรูปแบบ (10 หลัก)
+            const pattern = /^[0-9]{10}$/;
+            if (!pattern.test(mobileNumber)) {
+                alert("กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง (10 หลัก)!");
+                return false; // ป้องกันการส่งฟอร์ม
+            }
 
-                <!-- Begin Page Content -->
-               
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+            return true; // อนุญาตให้ส่งฟอร์มได้
+        }
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
