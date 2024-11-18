@@ -63,6 +63,10 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 50%; /* ใช้ 50% ของความกว้างหน้าจอ */
+            max-width: 600px; /* จำกัดความกว้างสูงสุด */
+            min-width: 300px; /* กำหนดความกว้างขั้นต่ำ */
+            box-sizing: border-box; /* รวม padding และ border ในการคำนวณขนาด */
         }
 
         h1 {
@@ -72,8 +76,9 @@
 
         input {
             width: 100%;
-            max-width: 300px;
             margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
         }
 
         button {
@@ -82,6 +87,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
         }
 
         button:hover {
@@ -94,6 +101,7 @@
 <body id="page-top">
 
 <form id="mobileForm" action="teble_data.php" method="GET" onsubmit="return validateForm()">
+    
         <h1>Mobile Number</h1>
         <!-- ช่องสำหรับใส่เบอร์มือถือ -->
         <input 
