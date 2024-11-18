@@ -115,40 +115,40 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tbody>
-                                    <?php
-                                        try {
-                                            // รับค่าเบอร์มือถือจากแบบฟอร์ม
-                                            $mobileNumber = isset($_GET['mobileNumber']) ? $_GET['mobileNumber'] : '';
+                                <?php
+                                try {
+                                    // รับค่าเบอร์มือถือจากแบบฟอร์ม
+                                    $mobileNumber = isset($_GET['mobileNumber']) ? $_GET['mobileNumber'] : '';
 
-                                            // ตรวจสอบว่ามีการกรอกเบอร์มือถือหรือไม่
-                                            if (!empty($mobileNumber)) {
-                                                // เตรียมคำสั่ง SQL สำหรับดึงข้อมูล 7 แถวล่าสุด
-                                                $stmt = $conn->prepare("
-                                                    SELECT User_Name, Meet_Result 
-                                                    FROM Oral_C_data 
-                                                    WHERE Mobile_No = :mobileNumber 
-                                                    ORDER BY Mobile_No DESC 
-                                                    LIMIT 7
-                                                ");
-                                                $stmt->bindParam(':mobileNumber', $mobileNumber, PDO::PARAM_STR);
+                                    // ตรวจสอบว่ามีการกรอกเบอร์มือถือหรือไม่
+                                    if (!empty($mobileNumber)) {
+                                        // เตรียมคำสั่ง SQL สำหรับดึงข้อมูล 7 แถวล่าสุด
+                                        $stmt = $conn->prepare("
+                                            SELECT Trans_Date, Meet_Result 
+                                            FROM Oral_C_data 
+                                            WHERE Mobile_No = :mobileNumber 
+                                            ORDER BY Trans_Date DESC 
+                                            LIMIT 7
+                                        ");
+                                        $stmt->bindParam(':mobileNumber', $mobileNumber, PDO::PARAM_STR);
 
-                                                // ดำเนินการคำสั่ง SQL
-                                                $stmt->execute();
+                                        // ดำเนินการคำสั่ง SQL
+                                        $stmt->execute();
 
-                                                // แสดงผลลัพธ์
-                                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                                    echo "<tr>";
-                                                    echo "<td>" . htmlspecialchars($row['User_Name']) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($row['Meet_Result']) . "</td>";
-                                                    echo "</tr>";
-                                                }
-                                            } else {
-                                                echo "<tr><td colspan='2'>กรุณาใส่หมายเลขโทรศัพท์เพื่อค้นหา.</td></tr>";
-                                            }
-                                        } catch (PDOException $e) {
-                                            echo "<tr><td colspan='2'>Error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+                                        // แสดงผลลัพธ์
+                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                            echo "<tr>";
+                                            echo "<td>" . htmlspecialchars($row['Trans_Date']) . "</td>";  // แสดงผลการพบปะ
+                                            echo "<td>" . htmlspecialchars($row['Meet_Result']) . "</td>";   // แสดงวันที่
+                                            echo "</tr>";
                                         }
-                                    ?>
+                                    } else {
+                                        echo "<tr><td colspan='2'>กรุณาใส่หมายเลขโทรศัพท์เพื่อค้นหา.</td></tr>";
+                                    }
+                                } catch (PDOException $e) {
+                                    echo "<tr><td colspan='2'>Error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
