@@ -137,9 +137,21 @@
 
                                         // แสดงผลลัพธ์
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                            $meetResult = htmlspecialchars($row['Meet_Result']);
+                                            $transDate = htmlspecialchars($row['Trans_Date']);
+
+                                            // กำหนดสีและข้อความตาม Meet_Result
+                                            if ($meetResult === "ปกติ") {
+                                                $color = "green";
+                                                $displayText = "Normal";
+                                            } else {
+                                                $color = "orange";
+                                                $displayText = "Risk";
+                                            }
+
                                             echo "<tr>";
-                                            echo "<td>" . htmlspecialchars($row['Trans_Date']) . "</td>";  // แสดงผลการพบปะ
-                                            echo "<td>" . htmlspecialchars($row['Meet_Result']) . "</td>";   // แสดงวันที่
+                                            echo "<td>" . $transDate . "</td>";
+                                            echo "<td style='color: $color;'>" . $displayText . "</td>";
                                             echo "</tr>";
                                         }
                                     } else {
@@ -149,6 +161,8 @@
                                     echo "<tr><td colspan='2'>Error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
                                 }
                                 ?>
+
+
                                 </tbody>
                             </table>
                         </div>
