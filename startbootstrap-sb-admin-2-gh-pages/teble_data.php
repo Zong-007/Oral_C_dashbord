@@ -129,6 +129,7 @@
                                             WHERE Mobile_No = :mobileNumber 
                                             ORDER BY Trans_Date DESC 
                                             LIMIT 7
+  
                                         ");
                                         $stmt->bindParam(':mobileNumber', $mobileNumber, PDO::PARAM_STR);
 
